@@ -1,9 +1,23 @@
 from fastapi import FastAPI
+import uvicorn
 from app.services.business.todo_service import TodoService
+from app.initdb.database import create_db_and_tables
+from contextlib import asynccontextmanager
 
-app = FastAPI()
 
 todo_service = TodoService()
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     # Startup code
+#     print("Application startup: Initializing resources")
+#     yield
+#     create_db_and_tables() # Call it here
+#     # Shutdown code
+#     print("Application shutdown: Cleaning up resources")
+
+# app = FastAPI(lifespan=lifespan)
+
+app = FastAPI()
 
 @app.get("/todos")
 async def get_todos():
@@ -24,3 +38,10 @@ async def update_todo(todo_id: int, todo: dict):
 @app.delete("/todos/{todo_id}")
 async def delete_todo(todo_id: int):
     return todo_service.delete_todo(todo_id)
+
+
+def main():
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000)
+
+if __name__ == "__main__":
+    main()

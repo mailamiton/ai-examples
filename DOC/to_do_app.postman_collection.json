@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "716f8c5d-9181-4e6e-81f0-ad1753630073",
+		"name": "to_do_app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12745657",
+		"_collection_link": "https://moneyclubrazorpay.postman.co/workspace/Non-Official~440cd6b4-8328-47d7-bf2c-845b634b9da4/collection/12745657-716f8c5d-9181-4e6e-81f0-ad1753630073?action=share&source=collection_link&creator=12745657"
+	},
+	"item": [
+		{
+			"name": "gettodo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/todos"
+			},
+			"response": []
+		},
+		{
+			"name": "gettodo By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/todos/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Create To Do",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\" : \"Create Home\", \"description\" : \"Need to create Home\", \"status\" : true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/todos"
+			},
+			"response": []
+		},
+		{
+			"name": "Update To",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\" : \"Create New Home \", \"description\" : \"Need to create New Home\", \"status\" : true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/todos/2"
+			},
+			"response": []
+		}
+	]
+}

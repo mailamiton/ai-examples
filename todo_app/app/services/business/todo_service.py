@@ -19,3 +19,6 @@ class TodoService:
 
     def delete_todo(self, todo_id: int):
         return self.todo_repository.delete_todo(todo_id)
+    
+    def init_db(self):
+        return self.todo_repository.init_db()
