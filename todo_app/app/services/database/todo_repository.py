@@ -18,7 +18,6 @@ class TodoRepository:
         return self.session.query(Todo).all()
 
     def create_todo(self, todo: Todo):
-        todo = Todo(**todo)
         self.session.add(todo)
         self.session.commit()
         return todo

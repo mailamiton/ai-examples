@@ -15,7 +15,7 @@ todo_service = TodoService()
 #     # Shutdown code
 #     print("Application shutdown: Cleaning up resources")
 
-# app = FastAPI(lifespan=lifespan)
+#app = FastAPI(lifespan=lifespan)
 
 app = FastAPI()
 
