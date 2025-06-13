@@ -44,3 +44,38 @@ A simple To-Do App built using FastAPI with an enterprise-level folder structure
 ## Schemas
 
 * `schemas.todo`: Defines the To-Do item schema for API requests and responses
+
+
+# MCP Details
+## Intallation
+  * With poetry 
+
+
+    ```
+    poetry init
+    poetry install
+    ```
+
+
+* With UV
+
+```
+uv venv
+uv sync
+
+```
+
+
+## MCP Server Configuration using mcp tool
+
+* Command to Run the tool
+
+  ``` 
+   cd ai-examples\todo_app
+   uv run mcp dev app\\main_mcp.py
+  ```
+* MCP Inspector Tool Can be found at  [URL](http://localhost:6274/#resources) 
+
+## MCP Configuration to be used in google ADK
+
+
