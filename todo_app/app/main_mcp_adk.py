@@ -30,14 +30,17 @@ todo_service = TodoService()
 
 
 
-# async def get_todos() -> list[dict]:
-#     results = [dict(row) for row in todo_service.get_todos()]
-#     #results = todo_service.get_todos()
-#     print("Results ::" , results)
-#     return results
 
 async def get_todos() -> list[dict]: # Return type will be list of dicts after model_dump
     # todo_service.get_todos() returns list[TodoSchema]
+    """
+    Asynchronously retrieve a list of all To-Do items.
+
+    Returns:
+        list[dict]: A list of dictionaries representing To-Do items,
+        with each dictionary containing the JSON serializable fields of a To-Do item.
+    """
+
     pydantic_models = todo_service.get_todos()
     # Convert Pydantic models to dicts for JSON serialization
     results = [model.model_dump(mode="json") for model in pydantic_models]
@@ -46,11 +49,32 @@ async def get_todos() -> list[dict]: # Return type will be list of dicts after m
 
 
 async def create_todo(todo: dict):
+    """
+    Asynchronously create a new To-Do item.
+
+    Parameters:
+        todo (dict): A dictionary containing the JSON serializable fields of a To-Do item.
+
+    Returns:
+        dict: The newly created To-Do item as a dictionary, with JSON serializable fields.
+
+    """
+    
     return todo_service.create_todo(todo)
 
 
 async def get_todo_by_id(todo_id: dict[str, int]) -> dict:
     # todo_service.get_todos() returns list[TodoSchema]
+    """
+    Retrieve a single To-Do item by its ID.
+
+    Parameters:
+        todo_id (dict[str, int]): A dictionary containing the ID of the To-Do item.
+
+    Returns:
+        dict: A dictionary representation of the To-Do item.
+    """
+
     pydantic_model = todo_service.get_todo_by_id(todo_id=todo_id.get("id"))
     # Convert Pydantic models to dicts for JSON serialization
     result = pydantic_model.model_dump(mode="json")
@@ -58,16 +82,43 @@ async def get_todo_by_id(todo_id: dict[str, int]) -> dict:
     return result
 
 async def get_todo_by_email(todo_id: dict[str, str]) -> list[dict]:
+    
     # todo_service.get_todos() returns list[TodoSchema]
+    """Get a list of todos by email
+    Parameters:
+        todo_id (dict[str, str]): Dictionary containing the email
+    Returns:
+        list[dict]: List of todos as dictionaries
+    """
     pydantic_models = todo_service.get_todo_by_email(email=todo_id.get("email"))
     # Convert Pydantic models to dicts for JSON serialization
     results = [model.model_dump(mode="json") for model in pydantic_models]
     return results
 
 async def update_todo(todo_id: int, todo: dict):
+    """
+    Asynchronously update a To-Do item by its ID.
+
+    Parameters:
+        todo_id (int): The ID of the To-Do item to update.
+        todo (dict): A dictionary containing the updated JSON serializable fields of the To-Do item.
+
+    Returns:
+        dict: The updated To-Do item as a dictionary, with JSON serializable fields.
+    """
+
     return todo_service.update_todo(todo_id, todo)
 
 async def delete_todo(todo_id: int):
+    """
+    Asynchronously delete a To-Do item by its ID.
+
+    Parameters:
+        todo_id (int): The ID of the To-Do item to delete.
+
+    Returns:
+        None
+    """
     return todo_service.delete_todo(todo_id)
 
 

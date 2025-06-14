@@ -25,7 +25,6 @@ root_agent = LlmAgent(
             connection_params=StdioServerParameters(
                 command="python",
                 args=[PATH_TO_YOUR_MCP_SERVER_SCRIPT],
-                timeout_sec=30,  # Timeout for MCP server process startup
             ),
             # tool_filter=['list_tables'] # Optional: ensure only specific tools are loaded
         )
