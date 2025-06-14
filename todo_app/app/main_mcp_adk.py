@@ -3,7 +3,7 @@ import json
 import logging  # Added logging
 import os
 import mcp.server.stdio  # For running as a stdio server
-
+from app.schemas import todo as To
 # ADK Tool Imports
 from google.adk.tools.function_tool import FunctionTool
 from google.adk.tools.mcp_tool.conversion_utils import adk_to_mcp_tool_type
@@ -30,16 +30,39 @@ todo_service = TodoService()
 
 
 
-async def get_todos():
-    return todo_service.get_todos()
+# async def get_todos() -> list[dict]:
+#     results = [dict(row) for row in todo_service.get_todos()]
+#     #results = todo_service.get_todos()
+#     print("Results ::" , results)
+#     return results
+
+async def get_todos() -> list[dict]: # Return type will be list of dicts after model_dump
+    # todo_service.get_todos() returns list[TodoSchema]
+    pydantic_models = todo_service.get_todos()
+    # Convert Pydantic models to dicts for JSON serialization
+    results = [model.model_dump(mode="json") for model in pydantic_models]
+    logging.debug(f"get_todos results: {results}") # Use logging
+    return results
 
 
 async def create_todo(todo: dict):
     return todo_service.create_todo(todo)
 
 
-async def get_todo_by_id(todo_id: int):
-    return todo_service.get_todo(todo_id)
+async def get_todo_by_id(todo_id: dict[str, int]) -> dict:
+    # todo_service.get_todos() returns list[TodoSchema]
+    pydantic_model = todo_service.get_todo_by_id(todo_id=todo_id.get("id"))
+    # Convert Pydantic models to dicts for JSON serialization
+    result = pydantic_model.model_dump(mode="json")
+    print("result ::",result)
+    return result
+
+async def get_todo_by_email(todo_id: dict[str, str]) -> list[dict]:
+    # todo_service.get_todos() returns list[TodoSchema]
+    pydantic_models = todo_service.get_todo_by_email(email=todo_id.get("email"))
+    # Convert Pydantic models to dicts for JSON serialization
+    results = [model.model_dump(mode="json") for model in pydantic_models]
+    return results
 
 async def update_todo(todo_id: int, todo: dict):
     return todo_service.update_todo(todo_id, todo)
@@ -58,7 +81,8 @@ app = Server("to-do-app-mcp-server")
 ADK_TODO_TOOLS = {
     "get_todos": FunctionTool(func=get_todos),
     "create_todo": FunctionTool(func=create_todo),
-    "query_db_table": FunctionTool(func=get_todo_by_id),
+    "get_todo_by_id": FunctionTool(func=get_todo_by_id),
+    "get_todo_by_email": FunctionTool(func=get_todo_by_email),
     "update_todo": FunctionTool(func=update_todo),
     "delete_todo": FunctionTool(func=delete_todo),
 }

@@ -22,8 +22,11 @@ class TodoRepository:
         self.session.commit()
         return todo
 
-    def get_todo(self, todo_id: int):
+    def get_todo_by_id(self, todo_id: int):
         return self.session.query(Todo).get(todo_id)
+    
+    def get_todo_by_email(self, email: str):
+        return self.session.query(Todo).filter(Todo.email == email).all()
 
     def update_todo(self, todo_id: int, todo: Todo):
         todo = Todo(**todo)
