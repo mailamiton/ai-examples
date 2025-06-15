@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging  # Added logging
 import os
+import mcp.server.sse
 import mcp.server.stdio  # For running as a stdio server
 from app.schemas import todo as To
 # ADK Tool Imports
@@ -201,6 +202,29 @@ async def call_mcp_tool(name: str, arguments: dict) -> list[mcp_types.TextConten
 
 
 # --- MCP Server Runner ---
+async def run_mcp_sse_server():
+    """Runs the MCP server, listening for connections over SSE."""
+    async with mcp.server.sse.SseServerTransport() as (read_stream, write_stream):
+        logging.info(
+            "MCP SSE Server: Starting handshake with client..."
+        )
+        await app.run(
+            read_stream,
+            write_stream,
+            InitializationOptions(
+                server_name=app.name,
+                server_version="0.1.0",
+                capabilities=app.get_capabilities(
+                    notification_options=NotificationOptions(),
+                    experimental_capabilities={},
+                ),
+            ),
+        )
+        logging.info(
+            "MCP SSE Server: Run loop finished or client disconnected."
+        )
+
+
 async def run_mcp_stdio_server():
     """Runs the MCP server, listening for connections over standard input/output."""
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
@@ -230,7 +254,8 @@ if __name__ == "__main__":
         "Launching MCP Server via stdio..."
     )  # Changed print to logging.info
     try:
-        asyncio.run(run_mcp_stdio_server())
+        #asyncio.run(run_mcp_stdio_server())
+        asyncio.run(run_mcp_sse_server())
     except KeyboardInterrupt:
         logging.info(
             "\nMCP Server (stdio) stopped by user."

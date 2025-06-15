@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "716f8c5d-9181-4e6e-81f0-ad1753630073",
+		"name": "to_do_app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12745657",
+		"_collection_link": "https://moneyclubrazorpay.postman.co/workspace/Non-Official~440cd6b4-8328-47d7-bf2c-845b634b9da4/collection/12745657-716f8c5d-9181-4e6e-81f0-ad1753630073?action=share&source=collection_link&creator=12745657"
+	},
+	"item": [
+		{
+			"name": "gettodo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gettodo By Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\" : 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/todobyid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todobyid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gettodo By email Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\" : \"user2@gmail.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/todobyemail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todobyemail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create To Do",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Work From Home2\",\r\n    \"title\": \"Office \",\r\n    \"schedule_dt\": \"2027-06-09T00:00:00\",\r\n    \"email\": \"user2@gmail.com\",\r\n    \"status\": true\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update To",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\" : \"Create New Home \", \"description\" : \"Need to create New Home\", \"status\" : true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/todos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

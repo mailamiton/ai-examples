@@ -1,0 +1,40 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Python package directories
+__pycache__/
+
+# Ignore virtual environment directories
+.venv/
+env/
+virtualenv/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+.pycharm/
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore database files
+*.db
+*.sqlite
+
+# Ignore Poetry files
+poetry.lock
+
+# Ignore other miscellaneous files
+*.egg-info/
+*.dist-info/
+*.build/
+*.egg/
+*.manifest
+*.spec
+*.whl
